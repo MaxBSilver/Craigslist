@@ -13,15 +13,15 @@ app.use(express.json());
 app.listen(port, () => {
   console.log(`App is running on port ${port}`);
 });
-app.get('/', (req, res) => {
-    res.status(200).send('hello max')
-  })
-  
+app.get("/", (req, res) => {
+  res.status(200).send("hello max");
+});
+
 app.get("/api/v1/missedconnections", (request, response) => {
-  database("missedconnections")
+  database("missedConnections")
     .select()
-    .then(items => {
-      response.status(200).json(items);
+    .then(missedConnections => {
+      response.status(200).json(missedConnections);
     })
     .catch(error => {
       response.status(500).json({ error });
