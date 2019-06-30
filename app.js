@@ -27,3 +27,15 @@ app.get("/api/v1/missedconnections", (request, response) => {
       response.status(500).json({ error });
     });
 });
+
+app.get("/api/v1/missedconnections/:id", (req, res) => {
+  database("missedConnections")
+    .where({ id: req.params.id })
+    .then(con => {
+      if (!con || !con.length)
+        res.status(404).json({ error: "No item found" });
+      else res.status(200).json(con);
+    })
+    .catch(error => res.status(500).json({ error }));
+});
+
