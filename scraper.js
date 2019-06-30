@@ -1,9 +1,9 @@
 var Nightmare = require("nightmare");
-var nightmare = Nightmare({ show: true }); // this opens a browser. Normally we don't want that to happen, as it slows things down
+var nightmare = Nightmare({ show: true });
 const fs = require("fs");
 let missedConnections;
 nightmare
-  .goto("https://denver.craigslist.org/d/groups/search/grp")
+  .goto("https://denver.craigslist.org/search/mis")
   .wait(2000)
   .evaluate(function() {
     var connections = [];
@@ -31,12 +31,9 @@ nightmare
   .end()
   .then(function(result) {
     missedConnections = result;
-    fs.writeFile("groups.json", JSON.stringify(missedConnections), error => {
-        console.log(error);
-      });
+    fs.writeFile("missedConnections.js", JSON.stringify(missedConnections), error => {
+    });
   })
   .catch(function(error) {
     console.error("Search failed:", error);
   });
-
-
