@@ -89,3 +89,31 @@ app.get("/api/v1/gigs", (request, response) => {
       response.status(500).json({ error });
     });
 });
+
+app.delete("/api/v1/gigs/:id", (request, response) => {
+  let found = false;
+  database("gigs")
+    .select()
+    .then(gigs => {
+      gigs.forEach(gig => {
+        if (gig.id === parseInt(request.params.id)) {
+          found = true;
+        }
+      });
+      if (!found) {
+        return response.status(404).json(`Gig does not exist`);
+      } else {
+        database("gigs")
+          .where("id", parseInt(request.params.id))
+          .del()
+          .then(() => {
+            return response
+              .status(202)
+              .json(`Deleted gig with id of ${request.params.id}`);
+          });
+      }
+    })
+    .catch(error => {
+      response.status(500).json({ error });
+    });
+});
