@@ -27,15 +27,65 @@ app.get("/api/v1/missedconnections", (request, response) => {
       response.status(500).json({ error });
     });
 });
-
+app.get("/api/v1/missedconnections/links", (request, response) => {
+  database("missedConnections")
+    .select()
+    .then(missedConnections => {
+      const links = missedConnections.map(connection => connection.link);
+      response.status(200).json(links);
+    })
+    .catch(error => {
+      response.status(500).json({ error });
+    });
+});
+app.get("/api/v1/missedconnections/dates", (request, response) => {
+  database("missedConnections")
+    .select()
+    .then(missedConnections => {
+      const dates = missedConnections.map(connection => connection.date);
+      response.status(200).json(dates);
+    })
+    .catch(error => {
+      response.status(500).json({ error });
+    });
+});
 app.get("/api/v1/missedconnections/:id", (req, res) => {
   database("missedConnections")
     .where({ id: req.params.id })
     .then(con => {
-      if (!con || !con.length)
-        res.status(404).json({ error: "No item found" });
+      if (!con) res.status(404).json({ error: "No item found" });
       else res.status(200).json(con);
     })
     .catch(error => res.status(500).json({ error }));
 });
 
+app.post("/api/v1/missedconnections", (request, response) => {
+  const newConnection = request.body;
+  const format = ["title", "link", "date"];
+  for (let requiredParam of format) {
+    if (!newConnection[requiredParam] && !newConnection[requiredParam] === "") {
+      return response.status(422).send({
+        error: `Expected format: ${format}. You are missing ${requiredParam}.`
+      });
+    }
+  }
+  database("missedConnections")
+    .insert(newConnection, "id")
+    .then(newConnection => {
+      response.status(201).json({ id: newConnection[0] });
+    })
+    .catch(error => {
+      response.status(500).json({ error });
+    });
+});
+
+app.get("/api/v1/gigs", (request, response) => {
+  database("gigs")
+    .select()
+    .then(gigs => {
+      response.status(200).json(gigs);
+    })
+    .catch(error => {
+      response.status(500).json({ error });
+    });
+});

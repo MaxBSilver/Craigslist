@@ -3,7 +3,7 @@ var nightmare = Nightmare({ show: true });
 const fs = require("fs");
 let missedConnections;
 nightmare
-  .goto("https://denver.craigslist.org/search/mis")
+  .goto("https://denver.craigslist.org/d/labor-gigs/search/lbg")
   .wait(2000)
   .evaluate(function() {
     var connections = [];
@@ -31,8 +31,7 @@ nightmare
   .end()
   .then(function(result) {
     missedConnections = result;
-    fs.writeFile("missedConnections.js", JSON.stringify(missedConnections), error => {
-    });
+    fs.writeFile("gigs.js", JSON.stringify(missedConnections), error => {});
   })
   .catch(function(error) {
     console.error("Search failed:", error);
