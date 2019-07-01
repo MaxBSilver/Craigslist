@@ -6,29 +6,25 @@ exports.up = function(knex) {
       table.string("date");
       table.string("time");
       table.string("link");
-      table.string("id");
-      table.string("uid");
     }),
     knex.schema.createTable("gigs", function(table) {
+      table.increments("id").primary();
       table.string("title");
       table.string("date");
       table.string("time");
       table.string("link");
-      table.string("id");
     }),
     knex.schema.createTable("activities", function(table) {
       table.string("title");
       table.string("date");
       table.string("time");
       table.string("link");
-      table.string("id");
     }),
     knex.schema.createTable("lostAndFound", function(table) {
       table.string("title");
       table.string("date");
       table.string("time");
       table.string("link");
-      table.string("id");
     })
   ]);
 };
