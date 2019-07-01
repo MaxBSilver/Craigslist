@@ -6,14 +6,15 @@ module.exports = {
       directory: "./db/migrations"
     },
     production: {
-      client: 'pg',
+      client: "pg",
       connection: process.env.DATABASE_URL + `?ssl=true`,
       seeds: {
-        directory: './db/seeds/dev'
+        directory: "./db/seeds/dev"
       },
-    seeds: {
-      directory: "./db/seeds/dev"
-    },
-    useNullAsDefault: true
+      seeds: {
+        directory: "./db/seeds/dev"
+      },
+      useNullAsDefault: true
+    }
   }
 };
