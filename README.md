@@ -5,6 +5,11 @@
 Get all missed connections:
 /api/v1/missedconnections
 
+```javascript
+function(){
+}
+```
+
 Get all missed connections links:
 /api/v1/missedconnections/links
 
