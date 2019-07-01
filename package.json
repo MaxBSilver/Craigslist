@@ -1,0 +1,22 @@
+{
+  "name": "craigs-list",
+  "version": "1.0.0",
+  "description": "### MissedConnections Get all missed connections: /api/v1/missedconnections",
+  "main": "knexfile.js",
+  "dependencies": {},
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MaxBSilver/Craigslist.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MaxBSilver/Craigslist/issues"
+  },
+  "homepage": "https://github.com/MaxBSilver/Craigslist#readme"
+}
