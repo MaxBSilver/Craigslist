@@ -119,21 +119,21 @@ app.delete("/api/v1/gigs/:id", (request, response) => {
 });
 
 app.post("/api/v1/gigs", (request, response) => {
-    const gig = request.body;
-    const format = ["title", "link", "date"];
-    for (let requiredParam of format) {
-      if (!gig[requiredParam] && !gig[requiredParam] === "") {
-        return response.status(422).send({
-          error: `Expected format: ${format}. You are missing ${requiredParam}.`
-        });
-      }
-    }
-    database("missedConnections")
-      .insert(gig, "id")
-      .then(gig => {
-        response.status(201).json({ id: gig[0] });
-      })
-      .catch(error => {
-        response.status(500).json({ error });
+  const gig = request.body;
+  const format = ["title", "link", "date"];
+  for (let requiredParam of format) {
+    if (!gig[requiredParam] && !gig[requiredParam] === "") {
+      return response.status(422).send({
+        error: `Expected format: ${format}. You are missing ${requiredParam}.`
       });
-  });
+    }
+  }
+  database("missedConnections")
+    .insert(gig, "id")
+    .then(gig => {
+      response.status(201).json({ id: gig[0] });
+    })
+    .catch(error => {
+      response.status(500).json({ error });
+    });
+});
