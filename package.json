@@ -3,7 +3,12 @@
   "version": "1.0.0",
   "description": "### MissedConnections Get all missed connections: /api/v1/missedconnections",
   "main": "knexfile.js",
-  "dependencies": {},
+  "dependencies": {
+    "express": "^4.17.1",
+    "knex": "^0.18.1",
+    "nightmare": "^3.0.2",
+    "node": "^12.5.0"
+  },
   "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
